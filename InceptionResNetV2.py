@@ -11,10 +11,10 @@ class BasicConv2d(nn.Module):
         super(BasicConv2d, self).__init__()
         self.conv = nn.Conv2d(in_planes, out_planes,
                               kernel_size=kernel_size, stride=stride,
-                              padding=padding, bias=False) # verify bias false
+                              padding=padding, bias=False)  # verify bias false
         self.bn = nn.BatchNorm2d(out_planes,
-                                 eps=0.001, # value found in tensorflow
-                                 momentum=0.1, # default pytorch value
+                                 eps=0.001,  # value found in tensorflow
+                                 momentum=0.1,  # default pytorch value
                                  affine=True)
         self.relu = nn.ReLU(inplace=False)
 
@@ -125,8 +125,8 @@ class Block17(nn.Module):
 
         self.branch1 = nn.Sequential(
             BasicConv2d(1088, 128, kernel_size=1, stride=1),
-            BasicConv2d(128, 160, kernel_size=(1,7), stride=1, padding=(0,3)),
-            BasicConv2d(160, 192, kernel_size=(7,1), stride=1, padding=(3,0))
+            BasicConv2d(128, 160, kernel_size=(1, 7), stride=1, padding=(0, 3)),
+            BasicConv2d(160, 192, kernel_size=(7, 1), stride=1, padding=(3, 0))
         )
 
         self.conv2d = nn.Conv2d(384, 1088, kernel_size=1, stride=1)
@@ -186,8 +186,8 @@ class Block8(nn.Module):
 
         self.branch1 = nn.Sequential(
             BasicConv2d(2080, 192, kernel_size=1, stride=1),
-            BasicConv2d(192, 224, kernel_size=(1,3), stride=1, padding=(0,1)),
-            BasicConv2d(224, 256, kernel_size=(3,1), stride=1, padding=(1,0))
+            BasicConv2d(192, 224, kernel_size=(1, 3), stride=1, padding=(0, 1)),
+            BasicConv2d(224, 256, kernel_size=(3, 1), stride=1, padding=(1, 0))
         )
 
         self.conv2d = nn.Conv2d(448, 2080, kernel_size=1, stride=1)
@@ -303,5 +303,3 @@ class InceptionResNetV2(nn.Module):
         x = self.features(input)
         x = self.logits(x)
         return x
-
-
